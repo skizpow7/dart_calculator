@@ -192,7 +192,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                                 context: context,
                                 applicationName:
                                     "Andrew Maag's Attempt at a\nFlutter Calculator",
-                                applicationVersion: "0.1");
+                                applicationVersion: "version: 0.1");
                           });
                     } else if (index == 19) {
                       return NumberButton(
@@ -316,6 +316,16 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                           });
                         },
                       );
+                    } else if (index == 18) {
+                      return ScienceButton(
+                          //equals button
+                          color: operandColor,
+                          text: sciButtons[index],
+                          onPressed: () {
+                            setState(() {
+                              calcFactorial();
+                            });
+                          });
                     } else if (index == 13) {
                       return ScienceButton(
                           //equals button
@@ -379,7 +389,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                                 context: context,
                                 applicationName:
                                     "Andrew Maag's Attempt at a\nFlutter Calculator",
-                                applicationVersion: "0.1");
+                                applicationVersion: "version: 0.1");
                           });
                     } else if (index == 29) {
                       return ScienceButton(
@@ -446,6 +456,20 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
     answer = input.interpret().toString();
   }
 
+  void calcFactorial() {
+    int fact = 1;
+    if (input == '0' || input == '' || input == '1' || input == '1.0') {
+      answer = fact.toString();
+    } else if (int.parse(input) > 1) {
+      for (int i = int.parse(input); i >= 1; i--) {
+        fact = fact * i;
+      }
+      answer = fact.toString();
+    } else {
+      answer = "Invalid Input";
+    }
+  }
+
   _dismissDialog() {
     Navigator.pop(context);
   }
@@ -453,10 +477,6 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   _openGitHub() async {
     const url = "https://github.com/skizpow7/dart_calculator";
     final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $url';
-    }
+    await launchUrl(uri);
   }
 }
