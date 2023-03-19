@@ -193,17 +193,20 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                         },
                       );
                     } else if (index == 18) {
-                      return NumberButton(
-                          //equals button
-                          color: operandColor,
-                          text: String.fromCharCodes(Runes('\u{01F6C8}')),
+                      return TextButton(
                           onPressed: () {
                             showAboutDialog(
                                 context: context,
                                 applicationName:
                                     "Andrew Maag's Attempt at a\nFlutter Calculator",
                                 applicationVersion: "version: 0.1");
-                          });
+                          },
+                          style: TextButton.styleFrom(
+                              backgroundColor: operandColor),
+                          child: Icon(
+                            Icons.info,
+                            color: Colors.white,
+                          ));
                     } else if (index == 19) {
                       return NumberButton(
                           //equals button
@@ -393,17 +396,20 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                         },
                       );
                     } else if (index == 28) {
-                      return ScienceButton(
-                          //equals button
-                          color: operandColor,
-                          text: String.fromCharCodes(Runes('\u{01F6C8}')),
+                      return TextButton(
                           onPressed: () {
                             showAboutDialog(
                                 context: context,
                                 applicationName:
                                     "Andrew Maag's Attempt at a\nFlutter Calculator",
                                 applicationVersion: "version: 0.1");
-                          });
+                          },
+                          style: TextButton.styleFrom(
+                              backgroundColor: operandColor),
+                          child: Icon(
+                            Icons.info,
+                            color: Colors.white,
+                          ));
                     } else if (index == 29) {
                       return ScienceButton(
                           //equals button
