@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:calculator/widgets.dart';
-import 'package:function_tree/function_tree.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:calculator/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:function_tree/function_tree.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() {
@@ -97,6 +97,17 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
   @override
   Widget build(BuildContext context) {
     final List<MenuBar> menuItems = <MenuBar>[];
+    var aspect = 0.0;
+    var orient = MediaQuery.of(context).orientation;
+    if (orient == Orientation.portrait && mode == 'stan') {
+      aspect = .99;
+    } else if (orient == Orientation.landscape && mode == 'stan') {
+      aspect = 4.5;
+    } else if (orient == Orientation.portrait && mode == 'sci') {
+      aspect = .95;
+    } else if (orient == Orientation.landscape && mode == 'sci') {
+      aspect = 4.4;
+    }
 
     menuItems.add(MenuBar(children: [
       MenuItemButton(
@@ -117,12 +128,11 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
             MenuBar(children: menuItems),
           ]),
           body: Column(children: <Widget>[
-            Expanded(
-              flex: 1,
+            Flexible(
+              fit: FlexFit.loose,
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(10.0),
                     alignment: Alignment.centerRight,
                     child: AutoSizeText(
                       input,
@@ -131,7 +141,6 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(5, 90, 5, 5),
                     alignment: Alignment.centerRight,
                     child: AutoSizeText(
                       answer,
@@ -142,13 +151,14 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                 ],
               ),
             ),
-            Expanded(
+            Flexible(
                 flex: 2,
-                child: Container(
-                    child: GridView.builder(
+                fit: FlexFit.loose,
+                child: GridView.builder(
+                  shrinkWrap: true,
                   itemCount: stanButtons.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4),
+                      childAspectRatio: aspect, crossAxisCount: 4),
                   itemBuilder: (BuildContext context, int index) {
                     if (index == 0) {
                       return NumberButton(
@@ -227,7 +237,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                       }
                     }
                   },
-                )))
+                ))
           ]));
     } else if (mode == "sci") {
       return Scaffold(
@@ -235,18 +245,16 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
             MenuBar(children: menuItems),
           ]),
           body: Column(children: <Widget>[
-            Expanded(
-              flex: 1,
+            Flexible(
+              fit: FlexFit.loose,
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(10.0),
                     alignment: Alignment.centerRight,
                     child: AutoSizeText(input,
                         style: TextStyle(fontSize: 30), maxLines: 1),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(5, 90, 5, 5),
                     alignment: Alignment.centerRight,
                     child: AutoSizeText(answer,
                         style: TextStyle(fontSize: 70), maxLines: 1),
@@ -254,13 +262,14 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                 ],
               ),
             ),
-            Expanded(
+            Flexible(
                 flex: 2,
                 child: Container(
                     child: GridView.builder(
+                  shrinkWrap: true,
                   itemCount: sciButtons.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 5),
+                      childAspectRatio: aspect, crossAxisCount: 5),
                   itemBuilder: (BuildContext context, int index) {
                     if (index == 0) {
                       return ScienceButton(

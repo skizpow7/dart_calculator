@@ -10,10 +10,21 @@ class NumberButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var fontSize = 0.0;
+    var orient = MediaQuery
+        .of(context)
+        .orientation;
+    if (orient == Orientation.portrait) {
+      fontSize = 50;
+    } else {
+      fontSize = 30;
+    }
+
     return MaterialButton(
         onPressed: onPressed,
         color: color,
-        child: Text(text, style: TextStyle(color: Colors.white, fontSize: 50)));
+        child: Text(
+            text, style: TextStyle(color: Colors.white, fontSize: fontSize)));
   }
 }
 
@@ -27,9 +38,19 @@ class ScienceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var fontSize = 0.0;
+    var orient = MediaQuery
+        .of(context)
+        .orientation;
+    if (orient == Orientation.portrait) {
+      fontSize = 50;
+    } else {
+      fontSize = 15;
+    }
     return MaterialButton(
         onPressed: onPressed,
         color: color,
-        child: Text(text, style: TextStyle(color: Colors.white, fontSize: 30)));
+        child: Text(
+            text, style: TextStyle(color: Colors.white, fontSize: fontSize)));
   }
 }
