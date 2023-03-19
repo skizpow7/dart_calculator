@@ -342,7 +342,11 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
                           text: sciButtons[index],
                           onPressed: () {
                             setState(() {
-                              input += "sqrt(";
+                              if (answer != '') {
+                                input = "sqrt(" + answer + ")";
+                              } else {
+                                input += "sqrt(";
+                              }
                             });
                           });
                     } else if (index == 22 ||
@@ -463,6 +467,7 @@ class _CalculatorHomePageState extends State<CalculatorHomePage> {
 
   void calculate() {
     answer = input.interpret().toString();
+    input = answer;
   }
 
   void calcFactorial() {
